@@ -1,0 +1,21 @@
+version: "3"
+services:
+  kineviz-s3fs:
+    image: kineviz/s3fs
+    environment:
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_STORAGE_BUCKET_NAME=${AWS_STORAGE_BUCKET_NAME}
+      - AWS_S3_MOUNTPOINT=/data
+    ports:
+      - 9080:8008
+    cap_add:
+      - MKNOD
+      - SYS_ADMIN
+    devices:
+      - /dev/fuse
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 1m

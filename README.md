@@ -16,11 +16,20 @@ Docker image for [s3fs fuse](https://github.com/s3fs-fuse/s3fs-fuse).
 ## Usage example
 
 ```bash
-docker run --rm -t -i --privileged \
+docker run -d -t -i --privileged \
+  --name s3fs \
   -e AWS_ACCESS_KEY_ID=xxxxxxxxxxxxxxxxxxxx \
   -e AWS_SECRET_ACCESS_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx \
   -e AWS_STORAGE_BUCKET_NAME=example \
-  docker.io/panubo/s3fs:1.87 ls /mnt
+  kineviz/s3fs:1.87
+```
+
+### docker-compose 
+
+edit copy .env.example to .env, and update the value
+
+```bash
+docker-compose up -d
 ```
 
 NB, requires `privileged` mode for access to fuse device.
